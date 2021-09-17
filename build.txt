@@ -1,0 +1,3 @@
+displayName = GenshinMod
+author = Griefer
+version = 0.1
