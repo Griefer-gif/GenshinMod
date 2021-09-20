@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod._De_Buffs
+namespace GenshinMod.DeBuffs
 {
     class ElectrifiedDebuff : ModBuff
     {

@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 
 namespace GenshinMod.Projectiles
 {
-    class AnemoLv1SkillProj : ModProjectile
+    abstract class AnemoLv1SkillProj : ModProjectile
     {
     }
 }
