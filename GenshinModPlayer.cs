@@ -10,6 +10,8 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.ID;
+using GenshinMod.Items.Visions;
+using GenshinMod.Projectiles;
 
 namespace GenshinMod
 {
@@ -56,9 +58,7 @@ namespace GenshinMod
             if(GenshinMod.ElementalSkill1.JustPressed && hasAnemo)
             {
                 Main.NewText("pogggg");
-                for(int  i = 0; i < 20; i++)
-                    Dust.NewDust(Player.Center - new Vector2(0, 1), 10, 10, DustID.GreenFairy, Player.velocity.X, Player.velocity.Y, Scale: 1);
-                Player.position.ToScreenPosition();
+                Projectile.NewProjectile(Player.GetProjectileSource_Misc(1), Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<AnemoLv1SkillProj>(), 20, 0, Player.whoAmI);
             }
             
 
