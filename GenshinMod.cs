@@ -20,16 +20,17 @@ namespace GenshinMod
 	{
 		public static ModKeybind ElementalSkill1;
 		public static ModKeybind ElementalSkill2;
-		public static ModKeybind Ultimate;
 
         public override void Load()
         {
-            ElementalSkill1 = KeybindLoader.RegisterKeybind(this, "Elemental Skill", Microsoft.Xna.Framework.Input.Keys.F);
+            ElementalSkill1 = KeybindLoader.RegisterKeybind(this, "Elemental Skill", Microsoft.Xna.Framework.Input.Keys.Q);
+            ElementalSkill2 = KeybindLoader.RegisterKeybind(this, "Ultimate Skill", Microsoft.Xna.Framework.Input.Keys.E);
         }
 
         public override void Unload()
         {
             ElementalSkill1 = null;
+            ElementalSkill2 = null;
             base.Unload();
         }
     }

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Terraria.ModLoader;
-using Terraria.ID;
 using Terraria;
+using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace GenshinMod.Items.Visions
 {
-    class AnemoLv1 : ModItem
+    class GeoLv1Path1 : ModItem
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Anemo Vision"); ;
+            DisplayName.SetDefault("Geo Vision"); ;
         }
         public override void SetDefaults()
         {
@@ -21,7 +21,7 @@ namespace GenshinMod.Items.Visions
             Item.height = 30;
             Item.accessory = true;
             Item.value = 0;
-            Item.rare = ItemRarityID.Green;
+            Item.rare = ItemRarityID.Orange;
         }
 
         public override void UpdateAccessory(Player player, bool hideVisual)
@@ -29,15 +29,16 @@ namespace GenshinMod.Items.Visions
             var Modplayer = player.GetModPlayer<GenshinModPlayer>();
 
             Modplayer.hasVisionEquip = true;
-            Modplayer.hasAnemo = true;
+            Modplayer.hasGeo = true;
+            Modplayer.hasPathOne = true;
         }
 
-        public override bool CanEquipAccessory(Player player, int slot)
+        public override bool CanEquipAccessory(Player player, int slot, bool modded)
         {
             if (player.GetModPlayer<GenshinModPlayer>().hasVisionEquip)
                 return false;
-            
-            return base.CanEquipAccessory(player, slot);
+
+            return base.CanEquipAccessory(player, slot, modded);
         }
     }
 }
