@@ -11,13 +11,13 @@ namespace GenshinMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Cryo Arrow");     //The English name of the projectile
+			DisplayName.SetDefault("Geo Arrow");     //The English name of the projectile
 
 		}
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isCryo = true;
+			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isGeo = true;
 			Projectile.width = 8; // The width of projectile hitbox
 			Projectile.height = 8; // The height of projectile hitbox
 

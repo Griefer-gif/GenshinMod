@@ -38,15 +38,26 @@ namespace GenshinMod.Projectiles
 			const double freq = 0.07;
 			Projectile.position.Y += (float)((Math.Cos(freq * Projectile.timeLeft) / 2) * amp * freq);
 
-			for (int i = 0; i < Main.player.Count(); i++)
+			
+			for (int i = 0; i < Main.player.Length; i++)
             {
+				Main.NewText(Main.player.Length);
 				Player cPlay = Main.player[i];
+				GenshinModPlayer PModP = Main.player[i].GetModPlayer<GenshinModPlayer>();
 				if(cPlay.Distance(Projectile.Center) < 31)
                 {
+					if(!PModP.hasGeoCrystalShield)
+                    {
+
+						PModP.hasGeoCrystalShield = true;
+						PModP.crystalShieldTimer = 300;
+						if(PModP.crystalShieldHP < 100)
+							PModP.crystalShieldHP += 25;
+					}
 					Projectile.active = false;
                 }
             }
-
+			
 			base.AI();
         }
     }

@@ -19,6 +19,7 @@ namespace GenshinMod
     {
         public bool hasVisionEquip;
 
+
         public bool hasAnemo;
         public bool hasGeo;
         public bool hasElectro;
@@ -29,6 +30,9 @@ namespace GenshinMod
         public bool hasChalk;
 
         public bool hasGeoCrystalShield;
+        public int crystalShieldHP;
+        public const int crystalShieldMaxHP = 100;
+        public float crystalShieldTimer = 0;
          
         public bool hasPathOne;
         public bool hasPathTwo;
@@ -38,7 +42,9 @@ namespace GenshinMod
             hasVisionEquip = false;
 
             hasAnemo = false;
+
             hasGeo = false;
+
             hasElectro = false;
             hasDendro = false;
             hasHydro = false;
@@ -50,11 +56,36 @@ namespace GenshinMod
             hasPathTwo = false;
         }
 
-        public override void PreUpdateBuffs()
+        public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
         {
-            
+            if(hasGeoCrystalShield)
+            {
+                //make the player immune here somehow
+                Player.immuneTime = Player.immuneTime = 30;
+                crystalShieldHP -= damage;
+                damage = 0;
+            }
+            base.ModifyHitByProjectile(proj, ref damage, ref crit);
         }
 
+        public override void PreUpdateBuffs()
+        {
+            if(crystalShieldTimer > 0)
+                crystalShieldTimer -= 1;
+
+            if (crystalShieldHP < crystalShieldMaxHP)
+                crystalShieldHP = 0;
+            else if (crystalShieldHP > crystalShieldMaxHP)
+                    crystalShieldHP = 100;
+
+            if (crystalShieldTimer == 0)
+            {
+                hasGeoCrystalShield = false;
+                crystalShieldHP = 0;
+            }
+        }
+
+        //keybinds and shi
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
             if(GenshinMod.ElementalSkill1.JustPressed)

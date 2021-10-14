@@ -1,4 +1,5 @@
-﻿using GenshinMod.DeBuffs;
+﻿using GenshinMod.Buffs;
+using GenshinMod.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -118,9 +119,15 @@ namespace GenshinMod
                 else
                     isAffectedPyro = true;
             }
-            else if (GProj.isGeo)
+            else if (GProj.isGeo && (isAffectedCryo || isAffectedElectro || isAffectedHydro || isAffectedPyro))
             {
                 Main.NewText("isGeo");
+                Projectile.NewProjectile(npc.GetProjectileSpawnSource(), npc.Center, Vector2.Zero, ModContent.ProjectileType<geoCrystal>(), 20, 0, 0);
+                isAffectedCryo = false;
+                isAffectedElectro = false;
+                isAffectedHydro = false;
+                isAffectedPyro = false;
+
                 //Geo projectiles will create a mini shield that will absorb a small amount of damage(like 10 dmg or something) on screen and they will stand still till someone touches them
             }
             else if (GProj.isCryo)

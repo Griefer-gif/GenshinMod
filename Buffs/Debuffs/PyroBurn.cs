@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod.DeBuffs
+namespace GenshinMod.Buffs
 {
     class PyroBurn : ModBuff
     {
