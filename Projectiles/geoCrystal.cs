@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,6 @@ namespace GenshinMod.Projectiles
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isAnemo = true;
 			Projectile.width = 30; // The width of projectile hitbox
 			Projectile.height = 30; // The height of projectile hitbox
 
@@ -39,21 +40,22 @@ namespace GenshinMod.Projectiles
 			Projectile.position.Y += (float)((Math.Cos(freq * Projectile.timeLeft) / 2) * amp * freq);
 
 			
-			for (int i = 0; i < Main.player.Length; i++)
-            {
-				Main.NewText(Main.player.Length);
+			for (int i = 0; i < Main.PlayerList.Count() - 1; i++)
+			{ 
+				//Main.NewText(Main.PlayerList.Count() - 1);
 				Player cPlay = Main.player[i];
 				GenshinModPlayer PModP = Main.player[i].GetModPlayer<GenshinModPlayer>();
-				if(cPlay.Distance(Projectile.Center) < 31)
-                {
-					if(!PModP.hasGeoCrystalShield)
-                    {
+				if (cPlay.Distance(Projectile.Center) < 31)
+				{
+					//Main.NewText("yes");
+					PModP.hasGeoCrystalShield = true;
+					PModP.crystalShieldTimer = 600;
+					if (PModP.crystalShieldHP < PModP.crystalShieldMaxHP)
+						PModP.crystalShieldHP += 50;
 
-						PModP.hasGeoCrystalShield = true;
-						PModP.crystalShieldTimer = 300;
-						if(PModP.crystalShieldHP < 100)
-							PModP.crystalShieldHP += 25;
-					}
+					Projectile.NewProjectile(cPlay.GetProjectileSource_Misc(cPlay.whoAmI), cPlay.Center, Vector2.Zero, ModContent.ProjectileType<ShieldProj>(), 20, 0, cPlay.whoAmI);
+
+					Main.NewText($"HP:{PModP.crystalShieldHP}, TIMER: {PModP.crystalShieldTimer}");
 					Projectile.active = false;
                 }
             }

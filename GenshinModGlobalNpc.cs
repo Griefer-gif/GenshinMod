@@ -119,7 +119,7 @@ namespace GenshinMod
                 else
                     isAffectedPyro = true;
             }
-            else if (GProj.isGeo && (isAffectedCryo || isAffectedElectro || isAffectedHydro || isAffectedPyro))
+            else if (GProj.isGeo && (isAffectedCryo | isAffectedElectro | isAffectedHydro | isAffectedPyro))
             {
                 Main.NewText("isGeo");
                 Projectile.NewProjectile(npc.GetProjectileSpawnSource(), npc.Center, Vector2.Zero, ModContent.ProjectileType<geoCrystal>(), 20, 0, 0);

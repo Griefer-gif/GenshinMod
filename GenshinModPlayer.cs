@@ -31,7 +31,7 @@ namespace GenshinMod
 
         public bool hasGeoCrystalShield;
         public int crystalShieldHP;
-        public const int crystalShieldMaxHP = 100;
+        public int crystalShieldMaxHP = 200;
         public float crystalShieldTimer = 0;
          
         public bool hasPathOne;
@@ -56,16 +56,17 @@ namespace GenshinMod
             hasPathTwo = false;
         }
 
-        public override void ModifyHitByProjectile(Projectile proj, ref int damage, ref bool crit)
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
         {
-            if(hasGeoCrystalShield)
+            //Main.NewText($"Shield hp: {crystalShieldHP} damage: {damage}");
+            if (hasGeoCrystalShield)
             {
+                Main.NewText($"Shield hp: {crystalShieldHP} damage: {damage}");
                 //make the player immune here somehow
-                Player.immuneTime = Player.immuneTime = 30;
                 crystalShieldHP -= damage;
                 damage = 0;
             }
-            base.ModifyHitByProjectile(proj, ref damage, ref crit);
+            return base.PreHurt(pvp, quiet, ref damage, ref hitDirection, ref crit, ref customDamage, ref playSound, ref genGore, ref damageSource);
         }
 
         public override void PreUpdateBuffs()
@@ -73,12 +74,12 @@ namespace GenshinMod
             if(crystalShieldTimer > 0)
                 crystalShieldTimer -= 1;
 
-            if (crystalShieldHP < crystalShieldMaxHP)
+            if (crystalShieldHP < 0)
                 crystalShieldHP = 0;
             else if (crystalShieldHP > crystalShieldMaxHP)
                     crystalShieldHP = 100;
 
-            if (crystalShieldTimer == 0)
+            if (crystalShieldTimer <= 0 || crystalShieldHP <= 0)
             {
                 hasGeoCrystalShield = false;
                 crystalShieldHP = 0;
@@ -117,6 +118,12 @@ namespace GenshinMod
             }
             
 
+        }
+
+        private void crystalShieldDamage(int damage, bool crit)
+        {
+            Main.NewText($"HP:{crystalShieldHP}, TIMER: {crystalShieldTimer}");
+            
         }
     }
 }
