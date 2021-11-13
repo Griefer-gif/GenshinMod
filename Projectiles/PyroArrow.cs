@@ -19,7 +19,7 @@ namespace GenshinMod.Projectiles
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isPyro = true;
+			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isHydro = true;
 			Projectile.width = 8; // The width of projectile hitbox
 			Projectile.height = 8; // The height of projectile hitbox
 

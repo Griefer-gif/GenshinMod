@@ -17,7 +17,7 @@ namespace GenshinMod.Projectiles
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isGeo = true;
+			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isCryo = true;
 			Projectile.width = 8; // The width of projectile hitbox
 			Projectile.height = 8; // The height of projectile hitbox
 

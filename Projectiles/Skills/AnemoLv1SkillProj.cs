@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Projectiles
+namespace GenshinMod.Projectiles.Skills
 {
     class AnemoLv1SkillProj : ModProjectile
     {

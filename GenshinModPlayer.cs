@@ -11,7 +11,7 @@ using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.ID;
 using GenshinMod.Items.Visions;
-using GenshinMod.Projectiles;
+using GenshinMod.Projectiles.Skills;
 
 namespace GenshinMod
 {
@@ -84,6 +84,8 @@ namespace GenshinMod
                 hasGeoCrystalShield = false;
                 crystalShieldHP = 0;
             }
+
+            
         }
 
         //keybinds and shi
@@ -114,10 +116,7 @@ namespace GenshinMod
                     if (hasPathTwo)
                         Main.NewText("how tf");
                 }
-
             }
-            
-
         }
 
         private void crystalShieldDamage(int damage, bool crit)

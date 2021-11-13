@@ -20,11 +20,13 @@ namespace GenshinMod
         public bool isAffectedHydro;
 
         public bool isAffectedPyro;
-        private int pyroDotTimer = 0;
 
         public bool isAffectedCryo;
         public bool isFrozen;
-        private int frozenTimer;
+        private int frozenTimer = 0;
+        public int frozenCooldown = 0;
+
+        //private Projectile ElectrifiedProj;
 
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
@@ -90,7 +92,7 @@ namespace GenshinMod
                     npc.AddBuff(ModContent.BuffType<ElectrifiedDebuff>(), 181);
                     isAffectedElectro = false;
                 }
-                else if (isAffectedCryo)
+                else if (isAffectedCryo && frozenTimer == 0)
                 {
                     isFrozen = true;
                 }
@@ -159,18 +161,36 @@ namespace GenshinMod
 
         public override bool PreAI(NPC npc)
         {
-            if (isFrozen)
+            if (frozenTimer >= 240 && frozenTimer <= 400)
             {
-                //bosses get unfrozen 2x faster
                 if (npc.boss)
                     frozenTimer += 2;
                 else
                     frozenTimer++;
+            }
+            else if(frozenTimer >= 400)
+                frozenTimer = 0;
+
+            if (isFrozen)
+            {
+                //bosses get unfrozen 2x faster
+                if (npc.boss)
+                {
+                    frozenTimer += 2;
+                    npc.velocity.X /= 5;
+                }
+                else
+                {
+                    frozenTimer++;
+                    npc.velocity.X = 0;
+                }
+                    
 
                 //if it has been 4 sec unfrezze
                 if(frozenTimer >= 240)
                 {
                     isFrozen = false;
+                    //frozenTimer = 0;
                 }
 
                 //dont execute ai if its frozen
