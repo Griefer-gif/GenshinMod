@@ -5,19 +5,19 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Projectiles
+namespace GenshinMod.Projectiles.E_Arrows
 {
-	public class ElectroArrow : ModProjectile
+	public class HydroArrow : ModProjectile
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Electro Arrow");     //The English name of the projectile
-			
+			DisplayName.SetDefault("Hydro Arrow");     //The English name of the projectile
+
 		}
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isElectro = true;
+			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isHydro= true;
 			Projectile.width = 8; // The width of projectile hitbox
 			Projectile.height = 8; // The height of projectile hitbox
 
@@ -44,7 +44,7 @@ namespace GenshinMod.Projectiles
 		{
 			// This code and the similar code above in OnTileCollide spawn dust from the tiles collided with. SoundID.Item10 is the bounce sound you hear.
 			Collision.HitTiles(Projectile.position + Projectile.velocity, Projectile.velocity, Projectile.width, Projectile.height);
-			
+
 		}
 
 		public override void AI()

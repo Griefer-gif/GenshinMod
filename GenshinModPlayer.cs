@@ -96,7 +96,7 @@ namespace GenshinMod
                 if(hasAnemo)
                 {
                     if(hasPathOne)
-                        Projectile.NewProjectile(Player.GetProjectileSource_Misc(1), Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<AnemoLv1SkillProj>(), 20, 0, Player.whoAmI);
+                        Projectile.NewProjectile(Player.GetProjectileSource_Misc(1), Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<AnemoLv1SkillProjPull>(), 20, 0, Player.whoAmI);
                     if (hasPathTwo)
                         Main.NewText("how tf");  
                 }

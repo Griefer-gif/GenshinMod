@@ -1,23 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Projectiles
+namespace GenshinMod.Projectiles.E_Arrows
 {
-	public class CryoArrow : ModProjectile
-	{
+    class PyroArrow : ModProjectile
+    {
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("Geo Arrow");     //The English name of the projectile
+			DisplayName.SetDefault("Pyro Arrow");     //The English name of the projectile
 
 		}
 
 		public override void SetDefaults()
 		{
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isCryo = true;
+			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isPyro = true;
 			Projectile.width = 8; // The width of projectile hitbox
 			Projectile.height = 8; // The height of projectile hitbox
 
@@ -49,6 +51,8 @@ namespace GenshinMod.Projectiles
 
 		public override void AI()
 		{
+			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+
 			float maxDetectRadius = 400f; // The maximum radius at which a projectile can detect a target
 			float projSpeed = 5f; // The speed at which the projectile moves towards the target
 
