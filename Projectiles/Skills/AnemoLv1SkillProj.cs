@@ -102,23 +102,23 @@ namespace GenshinMod.Projectiles.Skills
 					}
 
 					// pulls enemies that are close
-					if(npc.boss)
-                    {
-						Vector2 direction = Projectile.Center - npc.Center;
-						direction.Normalize();
-						direction *= 0.5f;
-						npc.velocity += direction;
-					}
-                    else
-                    {
-						Vector2 direction = Projectile.Center - npc.Center;
-						direction.Normalize();
-						direction *= 2f;
-						npc.velocity += direction;
-					}
+					//if(npc.boss)
+                    //{
+					//	Vector2 direction = Projectile.Center - npc.Center;
+					//	direction.Normalize();
+					//	direction *= 0.5f;
+					//	npc.velocity += direction;
+					//}
+                    //else
+                    //{
+					//	Vector2 direction = Projectile.Center - npc.Center;
+					//	direction.Normalize();
+					//	direction *= 2f;
+					//	npc.velocity += direction;
+					//}
                 }
             }
-		}
+		}  
 	}
 
 	class AnemoLv1SkillProjDmg : ModProjectile
@@ -143,7 +143,7 @@ namespace GenshinMod.Projectiles.Skills
 
 			Projectile.penetrate = -1;
 			Projectile.aiStyle = 0; // The ai style of the projectile (0 means custom AI). For more please reference the source code of Terraria
-			Projectile.DamageType = DamageClass.NoScaling; // What type of damage does this projectile affect?
+			Projectile.DamageType = DamageClass.Generic; // What type of damage does this projectile affect?
 			Projectile.friendly = true; // Can the projectile deal damage to enemies?
 			Projectile.hostile = false; // Can the projectile deal damage to the player?
 			Projectile.ignoreWater = true; // Does the projectile's speed be influenced by water?
@@ -154,13 +154,37 @@ namespace GenshinMod.Projectiles.Skills
 
 		public override void AI()
         {
-			Projectile sourceProj = Main.projectile[(int)Projectile.ai[0]];
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isCryo = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isCryo;
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isElectro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isElectro;
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isHydro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isHydro;
-			Projectile.GetGlobalProjectile<ModGlobalProjectile>().isPyro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isPyro;
+			//Projectile sourceProj = Main.projectile[(int)Projectile.ai[0]];
+			//Projectile.GetGlobalProjectile<ModGlobalProjectile>().isCryo = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isCryo;
+			//Projectile.GetGlobalProjectile<ModGlobalProjectile>().isElectro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isElectro;
+			//Projectile.GetGlobalProjectile<ModGlobalProjectile>().isHydro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isHydro;
+			//Projectile.GetGlobalProjectile<ModGlobalProjectile>().isPyro = sourceProj.GetGlobalProjectile<ModGlobalProjectile>().isPyro;
+			for (int i = 0; i < Main.npc.Count(); i++)
+			{
+				// the npc instance
+				NPC npc = Main.npc[i];
 
-			
+				//not exactly needed but im lazy to re-write it
+
+				if (npc.CanBeChasedBy() && npc.Distance(Projectile.Center) < 350f)
+				{
+					if (npc.boss)
+					{
+						Vector2 direction = Projectile.Center - npc.Center;
+						direction.Normalize();
+						direction *= 1f;
+						npc.velocity += direction;
+					}
+					else
+					{
+						Vector2 direction = Projectile.Center - npc.Center;
+						direction.Normalize();
+						direction *= 1.2f;
+						npc.velocity += direction;
+					}
+				}
+			}
+
 			Projectile.velocity = Vector2.Zero;
 		}
 

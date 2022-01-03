@@ -18,19 +18,19 @@ namespace GenshinMod
 {
 	public class GenshinMod : Mod
 	{
-		public static ModKeybind ElementalSkill1;
-		public static ModKeybind ElementalSkill2;
+		public static ModKeybind ElementalBurst;
+		public static ModKeybind ElementalSkill;
 
         public override void Load()
         {
-            ElementalSkill1 = KeybindLoader.RegisterKeybind(this, "Elemental Skill", Microsoft.Xna.Framework.Input.Keys.Q);
-            ElementalSkill2 = KeybindLoader.RegisterKeybind(this, "Ultimate Skill", Microsoft.Xna.Framework.Input.Keys.E);
+            ElementalBurst = KeybindLoader.RegisterKeybind(this, "Elemental Burst", Microsoft.Xna.Framework.Input.Keys.Q);
+            ElementalSkill = KeybindLoader.RegisterKeybind(this, "Ultimate Skill", Microsoft.Xna.Framework.Input.Keys.E);
         }
 
         public override void Unload()
         {
-            ElementalSkill1 = null;
-            ElementalSkill2 = null;
+            ElementalBurst = null;
+            ElementalSkill = null;
             base.Unload();
         }
     }

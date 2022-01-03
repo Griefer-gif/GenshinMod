@@ -31,7 +31,7 @@ namespace GenshinMod
         public override void ModifyHitByProjectile(NPC npc, Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
         {
             ModGlobalProjectile GProj = projectile.GetGlobalProjectile<ModGlobalProjectile>();
-            GenshinModGlobalNpc GNpc = npc.GetGlobalNPC<GenshinModGlobalNpc>();
+            
 
             //elemental reactions for when a projectile hits an enemy
             #region elemental reactions
@@ -161,50 +161,74 @@ namespace GenshinMod
 
         public override bool PreAI(NPC npc)
         {
-            if (frozenTimer >= 240 && frozenTimer <= 400)
+            int maxFrezzeTime = 240;
+            int cooldownTime = maxFrezzeTime + 300;
+            //ok so this is really confusing because im dumb and wrote dumb code, any npc unfrezzes when it reaches maxfrezzetime, but the timer keeps going till cooldowntime
+            //during wich the npc cannot be frozen again
+            if (frozenTimer >= maxFrezzeTime && frozenTimer <= cooldownTime)
             {
-                if (npc.boss)
-                    frozenTimer += 2;
-                else
-                    frozenTimer++;
+                frozenTimer++;
             }
-            else if(frozenTimer >= 400)
+            else if(frozenTimer >= cooldownTime)
                 frozenTimer = 0;
 
             if (isFrozen)
             {
-                //bosses get unfrozen 2x faster
-                if (npc.boss)
-                {
-                    frozenTimer += 2;
-                    npc.velocity.X /= 5;
-                }
-                else
-                {
-                    frozenTimer++;
-                    npc.velocity.X = 0;
-                }
-                    
-
                 //if it has been 4 sec unfrezze
-                if(frozenTimer >= 240)
+                if (frozenTimer >= maxFrezzeTime)
                 {
                     isFrozen = false;
                     //frozenTimer = 0;
                 }
 
-                //dont execute ai if its frozen
-                return false;
+                //bosses get unfrozen 2x faster
+                if (npc.boss)
+                {
+                    int vLim = 5;
+                    frozenTimer += 2;
+                    //ok so this limits the boss x and y velocity, theres probably a better way to do it but idk
+
+                    if (npc.velocity.X > vLim)
+                    {
+                        npc.velocity.X = vLim;
+                    }
+                    else if (npc.velocity.X < -vLim)
+                    {
+                        npc.velocity.X = -vLim;
+                    }
+                    
+                    if (npc.velocity.Y > vLim)
+                    {
+                        npc.velocity.Y = vLim;
+                    }
+                    else if (npc.velocity.Y < -vLim)
+                    {
+                        npc.velocity.Y = -vLim;
+                    }
+                }
+                else
+                {
+                    frozenTimer++;
+                    if (npc.noGravity == true)
+                        npc.velocity = Vector2.Zero;
+                    else
+                        npc.velocity.X = 0;
+
+                    //dont execute ai if its frozen && its not a boss
+                    return false;
+                }
             }
 
             return true;
         }
 
-        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
+        public override void DrawEffects(NPC npc, ref Color drawColor)
         {
-            //need to figure out some way to draw a mask ice texture over the sprite
-            
-            return base.PreDraw(npc, spriteBatch, screenPos, drawColor);
+            if (isFrozen)
+            {
+                drawColor = new Color(134, 214, 216);
+            }
+            base.DrawEffects(npc, ref drawColor);
         }
 
         private void doEStrike(int dmg, NPC target, float knockback, int hitDirection)

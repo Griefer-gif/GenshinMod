@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using GenshinMod.Items.Visions;
 using GenshinMod.Projectiles.Skills;
+using GenshinMod.Buffs.ECooldowns;
 
 namespace GenshinMod
 {
@@ -19,6 +20,8 @@ namespace GenshinMod
     {
         public bool hasVisionEquip;
 
+        public bool ESkillCooldown;
+        public bool EBurstCooldown;
 
         public bool hasAnemo;
         public bool hasGeo;
@@ -40,6 +43,9 @@ namespace GenshinMod
         public override void ResetEffects()
         {
             hasVisionEquip = false;
+
+            ESkillCooldown = false;
+            EBurstCooldown = false;
 
             hasAnemo = false;
 
@@ -91,7 +97,7 @@ namespace GenshinMod
         //keybinds and shi
         public override void ProcessTriggers(TriggersSet triggersSet)
         {
-            if(GenshinMod.ElementalSkill1.JustPressed)
+            if(GenshinMod.ElementalSkill.JustPressed && !ESkillCooldown)
             {
                 if(hasAnemo)
                 {
@@ -116,6 +122,13 @@ namespace GenshinMod
                     if (hasPathTwo)
                         Main.NewText("how tf");
                 }
+
+                Player.AddBuff(ModContent.BuffType<ESkillCooldown>(), 600);
+            }
+
+            if (GenshinMod.ElementalBurst.JustPressed && !EBurstCooldown)
+            {
+                Player.AddBuff(ModContent.BuffType<EBurstCooldown>(), 600);
             }
         }
 
