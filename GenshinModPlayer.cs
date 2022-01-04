@@ -13,6 +13,9 @@ using Terraria.ID;
 using GenshinMod.Items.Visions;
 using GenshinMod.Projectiles.Skills;
 using GenshinMod.Buffs.ECooldowns;
+using GenshinMod.Buffs.SkillBuffs;
+using GenshinMod.Buffs.SkillBuffs.Hydro.Path1;
+using GenshinMod.Projectiles.Skills.Anemo.Path1;
 
 namespace GenshinMod
 {
@@ -31,6 +34,8 @@ namespace GenshinMod
         public bool hasPyro;
         public bool hasCryo;
         public bool hasChalk;
+
+        public bool HydroPath1ESkillBuff;
 
         public bool hasGeoCrystalShield;
         public int crystalShieldHP;
@@ -57,6 +62,8 @@ namespace GenshinMod
             hasPyro = false;
             hasCryo = false;
             hasChalk = false;
+
+            HydroPath1ESkillBuff = false;
 
             hasPathOne = false;
             hasPathTwo = false;
@@ -90,8 +97,6 @@ namespace GenshinMod
                 hasGeoCrystalShield = false;
                 crystalShieldHP = 0;
             }
-
-            
         }
 
         //keybinds and shi
@@ -122,6 +127,20 @@ namespace GenshinMod
                     if (hasPathTwo)
                         Main.NewText("how tf");
                 }
+                if (hasDendro)
+                {
+                    if (hasPathOne)
+                        //Projectile.NewProjectile(Player.GetProjectileSource_Misc(1), Main.MouseWorld, Vector2.Zero, ModContent.ProjectileType<AnemoLv1SkillProjPull>(), 20, 0, Player.whoAmI);
+                    if (hasPathTwo)
+                        Main.NewText("how tf");
+                }
+                if (hasHydro)
+                {
+                    if (hasPathOne)
+                        Player.AddBuff(ModContent.BuffType<HydroPath1ESkillBuff>(), 600);   
+                    if (hasPathTwo)
+                        Main.NewText("how tf");
+                }
 
                 Player.AddBuff(ModContent.BuffType<ESkillCooldown>(), 600);
             }
@@ -130,12 +149,6 @@ namespace GenshinMod
             {
                 Player.AddBuff(ModContent.BuffType<EBurstCooldown>(), 600);
             }
-        }
-
-        private void crystalShieldDamage(int damage, bool crit)
-        {
-            Main.NewText($"HP:{crystalShieldHP}, TIMER: {crystalShieldTimer}");
-            
         }
     }
 }

@@ -11,7 +11,7 @@ using GenshinMod;
 using Terraria.DataStructures;
 using GenshinMod.Projectiles.E_Arrows;
 
-namespace GenshinMod.Items
+namespace GenshinMod.Items.DebugShtuff
 {
 	class TestGunElectro : ModItem
 	{

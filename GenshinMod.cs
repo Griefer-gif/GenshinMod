@@ -24,7 +24,7 @@ namespace GenshinMod
         public override void Load()
         {
             ElementalBurst = KeybindLoader.RegisterKeybind(this, "Elemental Burst", Microsoft.Xna.Framework.Input.Keys.Q);
-            ElementalSkill = KeybindLoader.RegisterKeybind(this, "Ultimate Skill", Microsoft.Xna.Framework.Input.Keys.E);
+            ElementalSkill = KeybindLoader.RegisterKeybind(this, "Ultimate Skill", Microsoft.Xna.Framework.Input.Keys.F);
         }
 
         public override void Unload()

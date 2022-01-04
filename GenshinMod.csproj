@@ -10,4 +10,11 @@
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Buffs\SkillBuffs\Anemo\" />
+    <Folder Include="Buffs\SkillBuffs\Geo\" />
+    <Folder Include="Buffs\SkillBuffs\Pyro\" />
+    <Folder Include="Items\Visions\Anemo\Path2\" />
+    <Folder Include="Items\Visions\Geo\Path2\" />
+  </ItemGroup>
 </Project>

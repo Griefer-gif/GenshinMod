@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Projectiles.AnimatedProjs
+namespace GenshinMod.Projectiles.GeoReaction
 {
     public class ShieldProj : ModProjectile
     {

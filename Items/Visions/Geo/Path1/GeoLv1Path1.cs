@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Items.Visions
+namespace GenshinMod.Items.Visions.Geo.Path1
 {
     class GeoLv1Path1 : ModItem
     {

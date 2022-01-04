@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Projectiles
+namespace GenshinMod.Projectiles.GeoReaction
 {
     public class geoCrystal : ModProjectile
     {
@@ -53,7 +53,7 @@ namespace GenshinMod.Projectiles
 					if (PModP.crystalShieldHP < PModP.crystalShieldMaxHP)
 						PModP.crystalShieldHP += 50;
 
-					Projectile.NewProjectile(cPlay.GetProjectileSource_Misc(cPlay.whoAmI), cPlay.Center, Vector2.Zero, ModContent.ProjectileType<AnimatedProjs.ShieldProj>(), 20, 0, cPlay.whoAmI);
+					Projectile.NewProjectile(cPlay.GetProjectileSource_Misc(cPlay.whoAmI), cPlay.Center, Vector2.Zero, ModContent.ProjectileType<ShieldProj>(), 20, 0, cPlay.whoAmI);
 
 					Main.NewText($"HP:{PModP.crystalShieldHP}, TIMER: {PModP.crystalShieldTimer}");
 					Projectile.active = false;

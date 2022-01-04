@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria;
 
-namespace GenshinMod.Items.Visions
+namespace GenshinMod.Items.Visions.Anemo.Path1
 {
     class AnemoLv1Path1 : ModItem
     {

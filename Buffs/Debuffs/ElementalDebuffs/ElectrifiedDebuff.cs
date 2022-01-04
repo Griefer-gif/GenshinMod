@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace GenshinMod.Buffs
+namespace GenshinMod.Buffs.Debuffs.ElementalDebuffs
 {
-    class PyroBurn : ModBuff
+    class ElectrifiedDebuff : ModBuff
     {
-        int burnTimer = 0;
+        int electrifiedTimer = 0;
 
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Berning!");
-            Description.SetDefault("damage over time");
+            DisplayName.SetDefault("Electrified");
+            Description.SetDefault("Movement speed down and overtime damage");
             Main.debuff[Type] = true;
             Main.buffNoSave[Type] = true;
         }
 
         public override void Update(NPC npc, ref int buffIndex)
         {
-            burnTimer++;
-            if (burnTimer % 30 == 0)
+            electrifiedTimer++;
+            if (electrifiedTimer % 60 == 0)
             {
                 npc.StrikeNPC(10, 0, 0);
                 npc.velocity /= 2;
-
+                
             }
         }
     }

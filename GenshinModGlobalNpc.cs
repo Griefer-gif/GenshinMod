@@ -1,5 +1,7 @@
 ﻿using GenshinMod.Buffs;
+using GenshinMod.Buffs.Debuffs.ElementalDebuffs;
 using GenshinMod.Projectiles;
+using GenshinMod.Projectiles.GeoReaction;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
